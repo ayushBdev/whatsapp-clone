@@ -25,8 +25,8 @@ const SidebarChat = () => {
     };
 
     useEffect(() => {
-        const pusher = new Pusher("ba02fea1a55cbc251adf", {
-            cluster: "ap2"
+        const pusher = new Pusher(process.env.REACT_APP_PUSHER, {
+            cluster: process.env.REACT_APP_CLUSTER
         });
 
         const channel = pusher.subscribe("rooms");
@@ -43,8 +43,8 @@ const SidebarChat = () => {
     }, [room]);
 
     useEffect(() => {
-        const pusher = new Pusher("ba02fea1a55cbc251adf", {
-            cluster: "ap2"
+        const pusher = new Pusher(process.env.REACT_APP_PUSHER, {
+            cluster: process.env.REACT_APP_CLUSTER
         });
 
         const channel = pusher.subscribe("rooms");
