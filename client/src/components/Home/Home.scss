@@ -1,0 +1,28 @@
+@mixin flex ($a, $b, $c) {
+    display: flex;
+    flex-direction: $a;
+    justify-content: $b;
+    align-items: $c;
+}
+
+.home {
+    @include flex(row, center, center);
+    width: 100%;
+    height: 99.8vh;
+}
+
+.sidebar_div {
+    @include flex(column, flex-start, flex-start);
+    min-width: 270px;
+    width: 30vw;
+    height: 100vh;
+    border: 1px solid lightgray;
+    border-right: none;
+}
+
+.chat_div {
+    width: 70vw;
+    height: 100%;
+    border: 1px solid lightgray;
+    border-left: none;
+}

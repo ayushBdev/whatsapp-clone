@@ -1,0 +1,132 @@
+@mixin flex ($a, $b, $c) {
+    display: flex;
+    flex-direction: $a;
+    justify-content: $b;
+    align-items: $c;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+.drawer {
+    @include flex(column, flex-start, center);
+    width: 30vw;
+    min-width: 250px;
+    height: 100%;
+}
+
+.drawer_header {
+    @include flex(row, space-between, flex-end);
+    width: 100%;
+    height: 16vh;
+    background-color: #02BFA5;
+    color: white;
+    padding: 0px 20px;
+    .MuiSvgIcon-root {
+        margin-bottom: 2.5vh;
+        cursor: pointer;
+        padding: 4px;
+        width: 30px;
+        height: 30px;
+        &:hover {
+            background-color: #21a896 ;
+            border-radius: 50%;
+        }
+    }
+    div {
+        @include flex(row, flex-start, flex-end);
+        width: 100%;
+        height: 16vh;
+        p {
+            margin-left: 2vw;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Noto Sans JP', sans-serif;
+            padding-bottom: 3vh;
+        }
+    }
+}
+
+.drawer_search {
+    @include flex(row, center, center);
+    width: 100%;
+    background-color: #EDEDED;
+    padding: 8px 10px;
+}
+
+.searchs {
+    @include flex(row, space-around, center);
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px;
+    .MuiSvgIcon-root {
+        width: 20px;
+        height: 20px;
+    }
+    input {
+        border: none;
+        outline: none;
+        font-size: 15px;
+        width: 85%;
+        padding: 2px 10px;
+        border-radius: 20px;
+    }
+}
+
+.drawer_menu {
+    @include flex(column, flex-start, center);
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.drawer_menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.drawer_menu::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background-color: #B7B7B7; 
+}
+
+.containers {
+    @include flex(row, space-between, center);
+    width: 100%;
+    height: auto;
+    padding: 12px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    &:hover {
+        background-color: #EDEDED;
+    }
+}
+
+.user_infos {
+    @include flex(row, center, center);
+    .MuiAvatar-root {
+        width: 46px;
+        height: 46px;
+    }
+    h4, p {
+        max-width: 18vw;
+        font-size: 15px;
+        margin-left: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: 'Open Sans', sans-serif;
+    }
+    p {
+        color: #8F8F8F;
+    }
+}
+
+.dates {
+    font-size: 13px;
+    color: #8F8F8F;
+}
+
+::placeholder {
+    font-size: 14px;
+}
