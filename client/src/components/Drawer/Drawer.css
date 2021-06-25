@@ -1,44 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
 .drawer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 30vw;
   min-width: 250px;
   height: 100%;
 }
 
 .drawer_header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   height: 16vh;
   background-color: #02BFA5;
   color: white;
   padding: 0px 20px;
 }
-
 .drawer_header .MuiSvgIcon-root {
   margin-bottom: 2.5vh;
   cursor: pointer;
@@ -46,81 +27,50 @@
   width: 30px;
   height: 30px;
 }
-
 .drawer_header .MuiSvgIcon-root:hover {
   background-color: #21a896;
   border-radius: 50%;
 }
-
 .drawer_header div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
   height: 16vh;
 }
-
 .drawer_header div p {
   margin-left: 2vw;
   font-weight: bold;
   letter-spacing: 1px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   padding-bottom: 3vh;
 }
 
 .drawer_search {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   background-color: #EDEDED;
   padding: 8px 10px;
 }
 
 .searchs {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
   background-color: white;
   border-radius: 20px;
   padding: 5px;
 }
-
 .searchs .MuiSvgIcon-root {
   width: 20px;
   height: 20px;
 }
-
 .searchs input {
   border: none;
   outline: none;
@@ -131,19 +81,10 @@
 }
 
 .drawer_menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   height: 100%;
   overflow-y: scroll;
@@ -160,52 +101,30 @@
 }
 
 .containers {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: auto;
   padding: 12px 10px;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
-
 .containers:hover {
   background-color: #EDEDED;
 }
 
 .user_infos {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-
 .user_infos .MuiAvatar-root {
   width: 46px;
   height: 46px;
 }
-
 .user_infos h4, .user_infos p {
   max-width: 18vw;
   font-size: 15px;
@@ -213,9 +132,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
-
 .user_infos p {
   color: #8F8F8F;
 }
@@ -225,7 +143,7 @@
   color: #8F8F8F;
 }
 
-::-webkit-input-placeholder {
+::-moz-placeholder {
   font-size: 14px;
 }
 
@@ -233,11 +151,6 @@
   font-size: 14px;
 }
 
-::-ms-input-placeholder {
-  font-size: 14px;
-}
-
 ::placeholder {
   font-size: 14px;
-}
-/*# sourceMappingURL=Drawer.css.map */
+}/*# sourceMappingURL=Drawer.css.map */

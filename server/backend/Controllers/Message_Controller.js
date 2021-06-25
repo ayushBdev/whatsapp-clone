@@ -4,22 +4,33 @@ import MessageSchema from "../Modals/Message_Modal.js";
 const router = express.Router();
 
 export const createMessage = async(req,res) => {
-    const { roomId, msg, from, time, date } = req.body;
+    const { id } = req.params;
+    const { msg, from, time, date } = req.body;
     try {
-        const data = await MessageSchema.create({ roomId, msg, from, time, date });
-        res.send(200).json(data);
-    }catch (err) {
-        res.status(404).json({message: err.message});
+        const update = await MessageSchema.findOneAndUpdate({roomId:id}, 
+            {$push: 
+                {messages: 
+                    {"msg": msg, 
+                    "time":time,
+                    "date": date,
+                    "from": from}}}, 
+                {new:true}
+        );
+        res.status(200).json({message: "Message send successfully"});
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
     }
 }
 
 export const getMessages = async(req, res) => {
     const { id } = req.params;
     try {
-        const Info = await MessageSchema.find({roomId: id});
+        const Info = await MessageSchema.findOne({roomId: id});
         res.status(200).json(Info);
-    }catch (err) {
-        res.status(404).json({message: err.message});
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
     }
 }
 

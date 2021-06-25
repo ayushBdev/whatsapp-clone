@@ -1,123 +1,73 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap");
 .chat {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 100%;
   letter-spacing: 0.5px;
+  overflow-x: hidden;
 }
-
 .chat .MuiSvgIcon-root {
   color: #919191;
   cursor: pointer;
 }
 
 .chat_header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 9%;
   padding: 10px;
   background-color: #EDEDED;
 }
-
 .chat_header .chats_div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-
 .chat_header .chats_div p {
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: bold;
   margin-left: 10px;
 }
 
 .chat_container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
   height: 82%;
-  background-image: url("../#Images/img4.png");
+  background-image: url("https://res.cloudinary.com/ayushbhatt/image/upload/v1624415037/WhattApp-Clone/nmk19hqbsfkuiczrwe7w.png");
   background-position: center;
   background-repeat: repeat-y;
   background-size: cover;
   padding: 0px 15px;
   overflow-y: scroll;
 }
-
 .chat_container::-webkit-scrollbar {
   width: 6px;
 }
-
 .chat_container::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background-color: #B7B7B7;
 }
 
 .chats_date {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   margin: 10px 0px;
 }
-
 .chats_date p {
   background-color: #E1F2FB;
   padding: 5px 10px;
@@ -129,7 +79,6 @@
 .chats_sender, .chats_receiver {
   width: 100%;
 }
-
 .chats_sender div, .chats_receiver div {
   max-width: 40%;
   background-color: white;
@@ -137,97 +86,56 @@
   padding: 10px;
   border-radius: 10px;
 }
-
 .chats_sender div h4, .chats_receiver div h4 {
   font-size: 13px;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
-
 .chats_sender div p, .chats_receiver div p {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
   background-color: white;
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   letter-spacing: 0px;
 }
-
 .chats_sender div p span, .chats_receiver div p span {
   color: #8F8F8F;
   font-size: 12px;
+  margin-left: 5px;
 }
 
 .chats_sender {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
-
 .chats_sender div h4 {
   color: #3989EE;
 }
 
 .chats_receiver {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
-
 .chats_receiver div h4 {
   color: #46D19E;
 }
 
 .chat_footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 9%;
   padding: 10px;
   background-color: #F0F0F0;
 }
-
 .chat_footer input {
   border: none;
   outline: none;
@@ -245,10 +153,8 @@
   font-size: 15px;
   cursor: pointer;
 }
-
 .no_btn:hover, .yes_btn:hover {
-  -webkit-box-shadow: 0 0 10px lightgray;
-          box-shadow: 0 0 10px lightgray;
+  box-shadow: 0 0 10px lightgray;
 }
 
 .no_btn {
@@ -266,7 +172,7 @@
   outline: none;
 }
 
-::-webkit-input-placeholder {
+::-moz-placeholder {
   font-size: 15px;
 }
 
@@ -274,11 +180,6 @@
   font-size: 15px;
 }
 
-::-ms-input-placeholder {
-  font-size: 15px;
-}
-
 ::placeholder {
   font-size: 15px;
-}
-/*# sourceMappingURL=Chat.css.map */
+}/*# sourceMappingURL=Chat.css.map */

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({baseURL: "http://localhost:5000/"});
+const API = axios.create({baseURL: "https://whatsapp-clone-servers.herokuapp.com/"});
 
 API.interceptors.request.use((req) => {
     if (localStorage.getItem("profile")) {
@@ -8,8 +8,6 @@ API.interceptors.request.use((req) => {
     }
     return req;
 });
-
-export default API;
 
 export const signIn = (formData) => API.patch("/auth/signin", formData);
 export const signUp = (formData) => API.post("/auth/signup", formData);
@@ -21,4 +19,6 @@ export const getRoom = () => API.get("/room");
 export const createRoom = (data) => API.post("/room", data);
 export const deleteRoom = (id) => API.delete(`/room/delete/${id}`);
 
-export const createMessage = (Data) => API.post("/message", Data);
+export const createMessage = (id,Data) => API.patch(`/message/create/${id}`, Data);
+
+export default API;

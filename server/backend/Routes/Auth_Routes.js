@@ -7,6 +7,6 @@ router.patch("/signin", signin);
 router.post("/signup", signup);
 router.get("/", getUsers);
 router.get("/status/:id", getUsersStatus);
-router.patch("/logout/:id", logouts);
+router.patch("/logout/:id",logouts);
 
 export default router;

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./SidebarInfo.css";
-import img from "../#Images/img.png";
-import img2 from "../#Images/img2.png";
+
+import { img, img2 } from "../Images/Images";
 import { Avatar, IconButton  } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SearchIcon from '@material-ui/icons/Search';
-import Drawers from "../Drawer/Drawer";
 
+import Drawers from "../Drawer/Drawer";
 import { logouts, getsStatus } from './../#Redux/Actions/Auth_Action';
 import { SWITCH, SELECTED } from "../#Redux/Actions/Types";
+import API from "../#Api/Api";
+import pusher from "../Pusher/Pusher";
+
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Pusher from "pusher-js";
-import API from "../#Api/Api";
-
+import Loader from "react-loader-spinner";
 
 const SidebarInfo = () => {  
 
@@ -21,6 +22,7 @@ const SidebarInfo = () => {
     const [room, setRoom] = useState([]);
     const [input, setInput] = useState("");
     const [filteredRooms, setFilteredRooms] = useState([]);
+
     const id  = user?.result._id;
     const Select = useSelector(state => state.SelectReducer);
     const dispatch = useDispatch();
@@ -54,21 +56,10 @@ const SidebarInfo = () => {
     };
 
     useEffect(() => {
-        API.get(`/room/${id}`)
-            .then(res => {
-                setRoom(res.data);
-            });
-    }, []);
-
-    useEffect(() => {
         setFilteredRooms(room.filter((arr) => arr.userName2.toLowerCase().includes(input.toLowerCase())));
     }, [input, room]);
 
     useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER, {
-            cluster: process.env.REACT_APP_CLUSTER
-        });
-
         const channel = pusher.subscribe("rooms");
         channel.bind("inserted", ((data) => {
             if(data.userId1 === user?.result._id || data.userId2 === user?.result._id) {
@@ -83,13 +74,9 @@ const SidebarInfo = () => {
     }, [room]);
 
     useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER, {
-            cluster: process.env.REACT_APP_CLUSTER
-        });
-
         const channel = pusher.subscribe("rooms");
         channel.bind("deleted", ((data) => {
-            API.get("/room")
+            API.get(`/room/userRooms/${id}`)
                 .then(res => (
                     setRoom(res.data)
             ));
@@ -100,6 +87,14 @@ const SidebarInfo = () => {
             channel.unsubscribe();
         }
     }, [room]);
+
+
+    useEffect(() => {
+        API.get(`/room/userRooms/${id}`)
+            .then(res => {
+                setRoom(res.data);
+            });
+    }, []);
 
     return (
         <div className="sidebar">
@@ -123,6 +118,14 @@ const SidebarInfo = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Search here for chat"
+                        />
+                        <Loader
+                            type="ThreeDots"
+                            color="#00BFFF"
+                            height={15}
+                            width={15}
+                            timeout={500000000}
+                            visible={true}
                         />
                     </div> 
                 </div>

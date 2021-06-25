@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import "./Chat.css";
-import img3 from "../#Images/img3.jpg";
+import "../Chat.css";
+
+import { img3 } from "../../Images/Images";
 import { Avatar, IconButton, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { SWITCH } from "../#Redux/Actions/Types";
-import { deleteRooms} from "../#Redux/Actions/Room_Action";
+import { SWITCH } from "../../#Redux/Actions/Types";
+import { deleteRooms} from "../../#Redux/Actions/Room_Action";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { removed } from "../Notifications";
 
 const ChatHeader = ({id,roomName}) => {
 
@@ -29,7 +30,6 @@ const ChatHeader = ({id,roomName}) => {
 
     const handelDelete = () => {
         dispatch(deleteRooms(id, history));
-        removed();
         handleClose();
         dispatch({
             type: SWITCH,
@@ -43,7 +43,7 @@ const ChatHeader = ({id,roomName}) => {
                 <Avatar src={img3}/>
                 <div>
                     <p> {roomName} </p>
-                    <p> {status.status} </p>
+                    <p> Last Seen {status.status} </p>
                 </div>
             </div>
             <div>

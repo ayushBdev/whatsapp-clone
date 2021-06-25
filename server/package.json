@@ -2,10 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Express.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Express.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.8",
     "nodemon": "^2.0.7",
-    "pusher": "^5.0.0",
-    "socket.io": "^4.1.1"
+    "pusher": "^5.0.0"
   }
 }

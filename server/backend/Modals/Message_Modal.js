@@ -5,22 +5,12 @@ const MessageModal = mongoose.Schema({
         type: String,
         required: true,
     },
-    msg: {
-        type: String,
-        required: true,
-    },
-    time: {
-        type: String,
-        required: true,
-    },
-    date: {
-        type: String,
-        required: true,
-    },
-    from: {
-        type: String,
-        required: true,
-    },
+    messages: [{
+        msg: { type: String },
+        time: { type: String },
+        date: { type: String },
+        from: { type: String },
+    }],
 });
 
 export default mongoose.model("MessageSchema", MessageModal);

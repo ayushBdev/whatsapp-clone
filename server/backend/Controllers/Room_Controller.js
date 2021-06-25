@@ -13,20 +13,34 @@ export const createRoom = async(req,res) => {
         } 
 
         const newRoom = await RoomSchema.create({ userId1, userId2, userName1, userName2 });
-        res.send(200).json(newRoom);
+        const newMessage = await MessageSchema.create({roomId:newRoom._id});
+        res.status(200).json({message: "Room Created Successfully"});
         
-    }catch (err) {
-        res.status(404).json({message: err.message});
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
+    }
+}
+
+export const getRoomOfUser = async(req, res) => {
+    const { id } = req.params;
+    try {
+        const Info = await RoomSchema.find({$or: [{userId1:id}, {userId2:id}]});
+        res.status(200).json(Info);
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
     }
 }
 
 export const getRoom = async(req, res) => {
     const { id } = req.params;
     try {
-        const Info = await RoomSchema.find({$or: [{userId1:id}, {userId2:id}]});
+        const Info = await RoomSchema.findById(id);
         res.status(200).json(Info);
-    }catch (err) {
-        res.status(404).json({message: err.message});
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
     }
 }
 
@@ -34,10 +48,11 @@ export const deleteRoom = async(req,res) => {
     const { id } = req.params;
     try {
         const detRoom = await RoomSchema.findByIdAndDelete(id);
-        const detMsg = await MessageSchema.deleteMany({roomId: id});
-        res.status(200).json({ detRoom, detMsg});
-    }catch (err) {
-        res.status(404).json({message: err.message});
+        const detMsg = await MessageSchema.deleteOne({roomId: id});
+        res.status(200).json({message: "Room deleted successfully"});
+    }catch (error) {
+        res.status(404).json({message: "Something went wrong at server!!"});
+        console.log(error);
     }
 };
 

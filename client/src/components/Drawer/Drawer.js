@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Drawer.css";
-import img2 from "../#Images/img2.png";
+
+import { img2 } from "../Images/Images";
 import { Avatar, Drawer } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SearchIcon from '@material-ui/icons/Search';
@@ -9,8 +10,10 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 
 import { usersData } from "../#Redux/Actions/Auth_Action";
 import { createRooms } from "../#Redux/Actions/Room_Action";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom"; 
+import Loader from "react-loader-spinner";
 
 const Drawers = () => {
 
@@ -33,7 +36,7 @@ const Drawers = () => {
     };
 
     const handelRefresh = () => {
-        dispatch(usersData());  //Check working
+        dispatch(usersData());
     };
 
     useEffect(() => {
@@ -66,6 +69,14 @@ const Drawers = () => {
                         placeholder="Search users"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                    />
+                    <Loader
+                        type="TailSpin"
+                        color="#00BFFF"
+                        height={15}
+                        width={15}
+                        timeout={500000000}
+                        visible={true}
                     />
                 </div>
             </div>

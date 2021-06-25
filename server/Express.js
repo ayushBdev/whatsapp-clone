@@ -5,11 +5,12 @@ import cors from "cors";
 import Pusher from "pusher";
 import dotenv from "dotenv";
 
-import authRoute from "./Routes/Auth_Routes.js";
-import roomRoute from "./Routes/Room_Routes.js";
-import messageRoute from "./Routes/Message_Routes.js";
+import authRoute from "./backend/Routes/Auth_Routes.js";
+import roomRoute from "./backend/Routes/Room_Routes.js";
+import messageRoute from "./backend/Routes/Message_Routes.js";
 
 const app = express();
+dotenv.config();
 
 app.use(bodyparser.json({limit:"30mb", extended:true}));
 app.use(bodyparser.urlencoded({limit:"30mb", extended:true}));
@@ -19,11 +20,8 @@ app.use("/auth", authRoute);
 app.use("/room", roomRoute);
 app.use("/message", messageRoute);
 
-
-dotenv.config({path: "./.env"});
-
 const PORT = process.env.PORT || 5000;
-const ATLAS = process.env.ATLAS;
+const ATLAS = process.env.ATLAS;         
 
 mongoose.connect(ATLAS, { useNewUrlParser:true, useUnifiedTopology:true, useFindAndModify:false})
     .then(() => app.listen(PORT, () => console.log(`Server running at Port ${PORT}`)))
@@ -67,23 +65,17 @@ db.once("open", () => {
         }
     });
 
-    //---------------------------------------------------------------------------------------------------
-
     const messageCollection = db.collection("messageschemas");
     const changeStream2 = messageCollection.watch();
 
     changeStream2.on("change",(change)=>{
         console.log("A change occured", change);
 
-        if(change.operationType === 'insert') {
-        const messageDetails = change.fullDocument;
-        pusher.trigger("message","inserted", 
+        if(change.operationType === 'update') {
+        const _id = change.documentKey._id;
+        pusher.trigger("message","updated", 
             {
-                roomId: messageDetails.roomId,
-                msg: messageDetails.msg,
-                from: messageDetails.from,
-                time: messageDetails.time,
-                date: messageDetails.date,
+                _id: _id,
             });
         } else {
             console.log("Error Trigging Pusher");

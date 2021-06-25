@@ -1,6 +1,6 @@
 import * as API from "../../#Api/Api";
-import { AUTH, GET_USERS, LOGOUT, STATUS } from "./Types";
-import { success, Logouts } from "../../Notifications";
+import { AUTH, GET_USERS, LOGOUT, STATUS, SPINNER } from "./Types";
+import { success, danger } from "../../Notifications/Notifications";
 
 export const logouts = (id,router) => async(dispatch) => {
     try {
@@ -9,38 +9,49 @@ export const logouts = (id,router) => async(dispatch) => {
             type: LOGOUT,
             payload: data
         });
-        Logouts();
+        danger(data.message);
         router.push("/");
     }catch(err) {
         console.log(`Auth Action ${err}`);
+        danger(err.response.data.message);
     }
 };
 
 export const signin = (formData,router) => async(dispatch) => {
     try {
         const { data } = await API.signIn(formData);
+        success(`Welcome ${data?.result.name}`);
         dispatch({
             type: AUTH,
             payload: data
         });
-        success(data?.result.name);
         router.push("/");
     }catch(err) {
         console.log(`Auth Action ${err}`);
+        dispatch({
+            type: SPINNER,
+            payload: false
+        });
+        danger(err.response.data.message);
     }
 };
 
 export const signup = (formData,router) => async(dispatch) => {
     try {
         const { data } = await API.signUp(formData);
+        success(`Welcome ${data?.result.name}`);
         dispatch({
             type: AUTH,
             payload: data
         });
-        success(data?.result.name);
         router.push("/");
     }catch(err) {
         console.log(`Auth Action ${err}`);
+        dispatch({
+            type: SPINNER,
+            payload: false
+        });
+        danger(err.response.data.message);
     }
 };
 

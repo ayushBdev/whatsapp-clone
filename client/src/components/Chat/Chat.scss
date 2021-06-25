@@ -13,6 +13,7 @@
     width: 100%;
     height: 100%;
     letter-spacing: 0.5px;
+    overflow-x: hidden;
     .MuiSvgIcon-root {
         color: #919191;
         cursor: pointer;
@@ -40,20 +41,19 @@
     @include flex(column, flex-start, flex-start);
     width: 100%;
     height: 82%;
-    background-image: url("../#Images/img4.png");
+    background-image: url("https://res.cloudinary.com/ayushbhatt/image/upload/v1624415037/WhattApp-Clone/nmk19hqbsfkuiczrwe7w.png");
     background-position: center;
     background-repeat: repeat-y;
     background-size: cover;
     padding: 0px 15px;
-    overflow-y: scroll
-}
-
-.chat_container::-webkit-scrollbar {
-    width: 6px;
-}
-.chat_container::-webkit-scrollbar-thumb {
-    border-radius: 20px;
-    background-color: #B7B7B7; 
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background-color: #B7B7B7; 
+    }
 }
 
 .chats_date {
@@ -90,6 +90,7 @@
             span {
                 color: #8F8F8F;
                 font-size: 12px;
+                margin-left: 5px;
             }
         }
     }

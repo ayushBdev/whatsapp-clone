@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Auth.css";
-import logo from "../#Images/logo.png";
+
+import { logo } from "../Images/Images";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 import { dates } from "../TimeStamp/TimeStamp";
 import { signin, signup } from './../#Redux/Actions/Auth_Action';
-import { useDispatch } from "react-redux";
+import { warning } from "../Notifications/Notifications";
+import { SPINNER } from "../#Redux/Actions/Types";
+import API from "../#Api/Api";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { wrongPassword } from "../Notifications";
+import Loader from "react-loader-spinner";
 
 const Auth = () => {
 
@@ -26,15 +31,21 @@ const Auth = () => {
     const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
     const [showPassword, setshowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+    const spinner = useSelector(state => state.SpinnerReducer);
 
     const handelSubmit = (event) => {
         event.preventDefault();
+        dispatch({
+            type: SPINNER,
+            payload: true
+        });
         if(isSignup) {
             if(form.password === form.confirmPassword) {
                 dispatch(signup(form,history));
             } else {
-                wrongPassword();
+                warning("Password Mismatch");
             }
         } else {
             dispatch(signin(form,history));
@@ -43,6 +54,10 @@ const Auth = () => {
 
     const handelShowPassword = () => {
         setshowPassword(preValue => !preValue);
+    };
+
+    const handelShowConfirmPassword = () => {
+        setShowConfirmPassword(preValue => !preValue);
     };
 
     const switchMode = () => {
@@ -54,13 +69,21 @@ const Auth = () => {
         return setForm({...form, [event.target.name]: event.target.value});
     };
 
-    return (
-        <div className="auth">
+    useEffect(() => {
+        API.get("/tests");
+        dispatch({
+            type: SPINNER,
+            payload: false,
+        });
+    }, []);
+
+    return (<>
+        <div className={spinner ? "opacitys auth" : "auth"}>
             <div className="logo">
-                <img src={logo}/>
+                <img src={logo} alt=""/>
             </div>
             <div className="text">
-                <p> Whatts App Clone By AYUSH BHATT</p>
+                <p> WhatsApp Clone By AYUSH BHATT</p>
             </div>
             <form className="auth_form" onSubmit={handelSubmit}>
                 {isSignup ? (
@@ -71,7 +94,6 @@ const Auth = () => {
                             value={form.name}
                             name="name"
                             onChange={handelChange}
-                            autocomplete="off"
                         />
                     </div>
                 ) : null}
@@ -82,7 +104,6 @@ const Auth = () => {
                         value={form.phoneNumber}
                         name="phoneNumber"
                         onChange={handelChange}
-                        autocomplete="off"
                     />
                 </div>
                 <div>
@@ -92,20 +113,19 @@ const Auth = () => {
                         value={form.password}
                         name="password"
                         onChange={handelChange}
-                        autocomplete="off"
                     />
                     {showPassword ? <VisibilityIcon onClick={handelShowPassword}/> : <VisibilityOffIcon onClick={handelShowPassword}/>}
                 </div>
                 {isSignup ? (
                     <div>
                         <input
-                            type="text"
+                            type={showConfirmPassword ? "text" : "password"}
                             placeholder="Confirm Password"
                             value={form.confirmPassword}
-                            name="confirmPassword"
+                            name="password"
                             onChange={handelChange}
-                            autocomplete="off"
                         />
+                        {showConfirmPassword ? <VisibilityIcon onClick={handelShowConfirmPassword}/> : <VisibilityOffIcon onClick={handelShowConfirmPassword}/>}
                     </div>
                 ) : null}
                 <button className="auth_btn" type="submit">
@@ -116,7 +136,18 @@ const Auth = () => {
                 {isSignup ? "Already have a account? Log In" : "Don't have a account. Sign Up"}
             </div>
         </div>
-    );
+
+        <div className={spinner ? "loader" : "loader none"}>
+            <Loader
+                type="Oval"
+                color="#00BFFF"
+                height={100}
+                width={100}
+                timeout={500000000}
+                visible={spinner}
+            />
+        </div>
+    </>);
 };
 
 

@@ -17,7 +17,7 @@ const Middleware = async(req,res,next) => {
             req.userId = decodedData?.sub;
         }
         next();
-    }catch {
+    }catch(error) {
         console.log(error);
     }
 };

@@ -1,14 +1,17 @@
 import React from "react";
-import "./Chat.css";
+import "../Chat.css";
 
-const ShowMsg = ({msg, roomName}) => {
+const ShowMsg = (props) => {
 
     const user = JSON.parse(localStorage.getItem("profile"));
 
-    return (
-        <>
-            
-            <div className="chats_date">
+    const msgs = props.message[0].messages;
+
+    return (<>
+    
+        {msgs && msgs.map(msg => (<>
+
+            <div className="chats_date" key={msg._id}>
                 <p> {msg.date} </p>
             </div>
 
@@ -22,14 +25,15 @@ const ShowMsg = ({msg, roomName}) => {
             ) : (
                 <div className="chats_receiver">
                     <div>
-                        <h4> {roomName} </h4> 
+                        <h4> {props.roomName} </h4> 
                         <p> {msg.msg} <span> {msg.time} </span></p>
                     </div>
                 </div>
-            )}
-            
-        </> 
-    );
+            )} 
+
+        </>))}
+
+    </>);
 };
 
 export default ShowMsg;

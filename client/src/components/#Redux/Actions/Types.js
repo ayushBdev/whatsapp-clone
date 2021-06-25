@@ -13,3 +13,5 @@ export const SELECTED = "SELECTED";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
 
 export const SWITCH = "SWITCH";
+
+export const SPINNER = "SPINNER";

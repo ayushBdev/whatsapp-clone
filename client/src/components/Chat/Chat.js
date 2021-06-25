@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef  } from "react";
 import "./Chat.css";
+
 import { IconButton } from '@material-ui/core';
 import MoodIcon from '@material-ui/icons/Mood';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SendIcon from '@material-ui/icons/Send';
-import ShowMsg from "./ShowMsg";
 
+import ShowMsg from "./ShowMesssages/ShowMsg";
 import { dateWeek, time } from "../TimeStamp/TimeStamp";
 import { createMessages} from "../#Redux/Actions/Message_Action";
+import API from "../#Api/Api";
+import ChatHeader from './ChatHeader/ChatHeader';
+
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import Pusher from "pusher-js";
-import API from "../#Api/Api";
-import ChatHeader from './ChatHeader';
-
+import pusher from "../Pusher/Pusher";
 
 const Chat = () => {
 
@@ -24,7 +25,6 @@ const Chat = () => {
     const messagesEndRef = useRef(null)
 
     const initialState = {
-        roomId: id,
         msg: "",
         from: user?.result._id,
         time: time,
@@ -38,27 +38,26 @@ const Chat = () => {
 
     const sendMessage = (event) => {
         event.preventDefault();
-        dispatch(createMessages(formData));
+        dispatch(createMessages(id, formData));
         setFormData(initialState);
-    };  
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    }
+    };
 
     useEffect(() => {
         scrollToBottom()
-      }, [message]);
+    }, [message]);
 
     useEffect(() => {
-        const pusher = new Pusher(process.env.REACT_APP_PUSHER, {
-            cluster: process.env.REACT_APP_CLUSTER
-        });
-
         const channel = pusher.subscribe("message");
-        channel.bind("inserted", ((data) => {
-            if(data.roomId === id) {
-                setMessage([...message, data]);
+        channel.bind("updated", ((data) => {
+            if(message._id === data._id) {
+                API.get(`/message/${id}`)
+                    .then(res => (
+                        setMessage(res.data)
+                ));
             }
         }));
 
@@ -90,19 +89,15 @@ const Chat = () => {
         <div className="chat">
             <div className="chat_header">
                 <ChatHeader
-                id={id}
-                roomName={roomName}
+                    id={id}
+                    roomName={roomName}
                 />
             </div>
             <div className="chat_container">
-                {message && message.map(arr => (
-                    <ShowMsg
-                        key={arr._id}
-                        msg={arr}
-                        roomName={roomName}
-                        dates={arr.date}
-                    />
-                ))}
+                <ShowMsg
+                    message={[message]}
+                    roomName={roomName}
+                />
                 <div ref={messagesEndRef} />
             </div>
             <form className="chat_footer" onSubmit={sendMessage}>

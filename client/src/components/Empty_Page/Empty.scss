@@ -29,6 +29,14 @@
             color: #32C76C;
             cursor: pointer;
             margin-left: 5px;
+            a {
+                text-decoration: none;
+            }
+            &:hover {
+                transform: scale(1.1);
+                transition: all 0.2s ease-out;
+                margin-left: 5px;
+            }
         }
     }
 }
