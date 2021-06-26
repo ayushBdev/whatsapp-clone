@@ -16,4 +16,6 @@ It is made using React, Node.js, Express & MongoDB. The App is clone of WhatsApp
 
 -Search for chat from sidebar
 
+-Delete Chat
+
 -Real time updates
